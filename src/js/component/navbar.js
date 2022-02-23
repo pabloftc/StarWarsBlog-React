@@ -1,17 +1,41 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from '../store/appContext'
 import { Link } from "react-router-dom";
+import { Navbar, Container, Dropdown } from 'react-bootstrap'
+import starwarslogo from '../../img/starwarslogo2.png'
+import { FaTrash } from "react-icons/fa";
 
-export const Navbar = () => {
+export const NavbarSW = () => {
+	const {store, actions} = useContext(Context);
 	return (
-		<nav className="navbar navbar-light bg-light mb-3">
-			<Link to="/">
-				<span className="navbar-brand mb-0 h1">React Boilerplate</span>
+		<Navbar>
+    	<Container>
+			<Link to={"/"}>
+      	<Navbar.Brand href="#home">
+        <img
+          alt=""
+          src={starwarslogo}
+          width="90"
+          height="80"
+          className="d-inline-block align-top"
+        />
+      	</Navbar.Brand>
 			</Link>
-			<div className="ml-auto">
-				<Link to="/demo">
-					<button className="btn btn-primary">Check the Context in action</button>
-				</Link>
-			</div>
-		</nav>
+		<Dropdown>
+  		<Dropdown.Toggle variant="primary" id="dropdown-basic">
+   		 Favorites {'  '}<span className='span-favorites'>{store.favorites.length}</span>
+  		</Dropdown.Toggle>
+
+ 		 <Dropdown.Menu>{store.favorites.map((favorite, idx) => {
+			  return (
+				  <Dropdown.Item key={idx}>
+					  {favorite} <FaTrash onClick={(idx) => {actions.removeFavorite(favorite)}}/>
+				  </Dropdown.Item>
+			  )
+		  })}
+  		 </Dropdown.Menu>
+		</Dropdown>
+		</Container>
+  		</Navbar>
 	);
 };

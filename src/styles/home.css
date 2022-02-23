@@ -1,0 +1,15 @@
+.scrollable-row {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.span-favorites {
+    padding: 3px;
+    border-radius: 5px;
+    background-color: grey;
+    color: white;
+}
